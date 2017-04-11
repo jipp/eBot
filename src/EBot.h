@@ -3,6 +3,7 @@
 
 #include "Arduino.h"
 #include <Servo.h>
+#include <IRremote.h>
 
 #define ENA 5
 #define ENB 11
@@ -31,6 +32,8 @@ public:
   void backward();
   void turnLeft();
   void turnRight();
+  void barkLeft();
+  void barkRight();
   float distance();
   void servoRotate(int angle);
   line followLine();
