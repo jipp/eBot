@@ -1,0 +1,33 @@
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+EBot  KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+move  KEYWORD2
+stop  KEYWORD2
+forward KEYWORD2
+backward  KEYWORD2
+turnLeft  KEYWORD2
+turnRight KEYWORD2
+distance  KEYWORD2
+servoRotate KEYWORD2
+followLine  KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+
+ENA LITERAL1
+IN1 LITERAL1
+IN2 LITERAL1
+ENB LITERAL1
+IN3 LITERAL1
+IN4 LITERAL1
+Echo  LITERAL1
+Trig  LITERAL1
+ServoPin  LITERAL1
