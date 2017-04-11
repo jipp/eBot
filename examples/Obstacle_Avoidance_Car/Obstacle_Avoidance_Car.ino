@@ -9,7 +9,7 @@ int rightDistance = 0,leftDistance = 0,middleDistance = 0 ;
 
 void setup() {
   Serial.begin(115200);
-  eBot.move(true);
+  eBot.move(ABS);
   eBot.stop();
 }
 
