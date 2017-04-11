@@ -9,6 +9,7 @@ int rightDistance = 0,leftDistance = 0,middleDistance = 0 ;
 
 void setup() {
   Serial.begin(115200);
+  eBot.move(true);
   eBot.stop();
 }
 
@@ -48,32 +49,22 @@ void loop() {
     delay(500);
     eBot.servoRotate(90);
     delay(1000);
-    if(rightDistance>leftDistance)
-    {
+    if(rightDistance>leftDistance) {
       eBot.move(true);
       eBot.barkRight();
       delay(360);
     }
-    else if(rightDistance<leftDistance)
-    {
-      eBot.move(true);
+    else if(rightDistance<leftDistance) {
       eBot.barkLeft();
       delay(360);
     }
-    else if((rightDistance<=20)||(leftDistance<=20))
-    {
-      eBot.move(true);
+    else if((rightDistance<=20)||(leftDistance<=20)) {
       eBot.backward();
       delay(180);
-    }
-    else
-    {
-      eBot.move(true);
+    } else {
       eBot.forward();
     }
-  }
-  else {
-    eBot.move(true);
+  } else {
     eBot.forward();
   }
 }
