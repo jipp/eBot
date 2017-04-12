@@ -2,6 +2,7 @@
 #include <EBot.h>
 
 Servo servo;
+IRrecv irrecv(receiverpin);
 
 EBot::EBot() {
   pinMode(IN1, OUTPUT);
@@ -13,6 +14,7 @@ EBot::EBot() {
   pinMode(Echo, INPUT);
   pinMode(Trig, OUTPUT);
   servo.attach(ServoPin);
+  irrecv.enableIRIn();
 }
 
 EBot::~EBot() {
@@ -108,4 +110,17 @@ EBot::line EBot::followLine() {
   } else {
     return EBot::OK;
   }
+}
+
+unsigned long EBot::decode() {
+  decode_results results;
+  unsigned long decode;
+
+  if (irrecv.decode(&results)) {
+    decode = results.value;
+    irrecv.resume();
+    return decode;
+  }
+
+  return 0;
 }
