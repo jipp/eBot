@@ -5,6 +5,7 @@
 EBot eBot = EBot();
 
 void setup() {
+  eBot.init();
   eBot.move(true);
 }
 
