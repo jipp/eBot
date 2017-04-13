@@ -1,9 +1,14 @@
 #include "Arduino.h"
 #include <EBot.h>
 
-Servo servo;
-
 EBot::EBot() {
+}
+
+EBot::~EBot() {
+  servo.detach();
+}
+
+void EBot::init() {
   pinMode(IN1, OUTPUT);
   pinMode(IN2, OUTPUT);
   pinMode(IN3, OUTPUT);
@@ -13,10 +18,7 @@ EBot::EBot() {
   pinMode(Echo, INPUT);
   pinMode(Trig, OUTPUT);
   servo.attach(ServoPin);
-}
-
-EBot::~EBot() {
-  servo.detach();
+  servo.write(90);
 }
 
 void EBot::move(bool speed) {
@@ -34,6 +36,26 @@ void EBot::stop() {
   digitalWrite(IN2, LOW);
   digitalWrite(IN3, LOW);
   digitalWrite(IN4, LOW);
+}
+
+void EBot::leftWheelForward() {
+  digitalWrite(IN3,LOW);
+  digitalWrite(IN4,HIGH);
+}
+
+void EBot::leftWheelBackward() {
+  digitalWrite(IN3,HIGH);
+  digitalWrite(IN4,LOW);
+}
+
+void EBot::rightWheelForward() {
+  digitalWrite(IN1,HIGH);
+  digitalWrite(IN2,LOW);
+}
+
+void EBot::rightWheelBackward() {
+  digitalWrite(IN1,LOW);
+  digitalWrite(IN2,HIGH);
 }
 
 void EBot::forward() {

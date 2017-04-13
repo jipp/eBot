@@ -25,9 +25,14 @@ public:
 
   enum line { OK, RIGHT, LEFT, NOK};
 
+  void init();
   void move(bool speed);
   void move(int speed);
   void stop();
+  void leftWheelForward();
+  void leftWheelBackward();
+  void rightWheelForward();
+  void rightWheelBackward();
   void forward();
   void backward();
   void turnLeft();
@@ -39,6 +44,7 @@ public:
   line followLine();
 
 private:
+  Servo servo;
 
 };
 
