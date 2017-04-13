@@ -19,6 +19,11 @@ void EBot::init() {
   pinMode(Trig, OUTPUT);
   servo.attach(ServoPin);
   servo.write(90);
+  irrecv.enableIRIn();
+}
+
+EBot::~EBot() {
+  servo.detach();
 }
 
 void EBot::move(bool speed) {
@@ -130,4 +135,17 @@ EBot::line EBot::followLine() {
   } else {
     return EBot::OK;
   }
+}
+
+unsigned long EBot::decode() {
+  decode_results results;
+  unsigned long decode;
+
+  if (irrecv.decode(&results)) {
+    decode = results.value;
+    irrecv.resume();
+    return decode;
+  }
+
+  return 0;
 }

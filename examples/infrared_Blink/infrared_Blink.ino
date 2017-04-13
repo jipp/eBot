@@ -1,35 +1,28 @@
-//www.elegoo.com
-//2016.09.19
+#include "Arduino.h"
 
-#include <IRremote.h>//Infrared Library
-int receiverpin = 12;//Infrared signal receiving pin
-int LED=13;                //define LED pin
-volatile int state = LOW;  //define default input mode
-unsigned long RED;
+#include <EBot.h>
+
 #define L 16738455
-IRrecv irrecv(receiverpin);//initialization
-decode_results results;//Define structure type
-void setup() {
-pinMode(LED, OUTPUT);     //initialize LED as an output
-Serial.begin(9600);       // debug output at 9600 baud
- irrecv.enableIRIn();// Start receiving
-}
-void stateChange()      
-{
-  state = !state;          
-  digitalWrite(LED, state);
-}
-void loop() {
-if (irrecv.decode(&results))
-    { 
-      RED=results.value;
-       Serial.println(RED);
-       irrecv.resume(); // Receive the next value
-    delay(150);
-     if(RED==L)
-  {  
-     stateChange();
-   }
-  }
-     }
 
+EBot eBot = EBot();
+bool state = LOW;  //define default input mode
+unsigned long RED;
+
+void stateChange() {
+  state = !state;
+  digitalWrite(LED_BUILTIN, state);
+}
+
+void setup() {
+  pinMode(LED_BUILTIN, OUTPUT);
+  Serial.begin(115200);
+}
+
+void loop() {
+  RED = eBot.decode();
+  Serial.println(RED);
+  delay(150);
+  if(RED==L) {
+    stateChange();
+  }
+}

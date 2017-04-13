@@ -17,6 +17,7 @@
 #define LightSensor1  10
 #define LightSensor2  4
 #define LightSensor3  2
+#define receiverpin 12
 
 class EBot {
 public:
@@ -42,9 +43,11 @@ public:
   float distance();
   void servoRotate(int angle);
   line followLine();
+  unsigned long decode();
 
 private:
   Servo servo;
+  IRrecv irrecv(receiverpin);
 
 };
 
