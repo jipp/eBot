@@ -10,7 +10,7 @@ EBot  KEYWORD1
 
 begin	KEYWORD2
 stop	KEYWORD2
-rightWheelForward	KEYWORD2 
+rightWheelForward	KEYWORD2
 rightWheelBackward	KEYWORD2
 rightWheelStop	KEYWORD2
 leftWheelForward	KEYWORD2
@@ -34,3 +34,7 @@ IN2 LITERAL1
 ENB LITERAL1
 IN3 LITERAL1
 IN4 LITERAL1
+ServoPin  LITERAL1
+Echo  LITERAL1
+Trig  LITERAL1
+receiverpin LITERAL1
