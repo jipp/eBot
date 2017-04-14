@@ -2,8 +2,6 @@
 #define EBot_h
 
 #include "Arduino.h"
-#include <Servo.h>
-#include <IRremote.h>
 
 class EBot {
 public:
@@ -21,9 +19,12 @@ public:
   void leftWheelBackward();
   void leftWheelBackward(int speed);
   void leftWheelStop();
+  void forward();
+  void forward(int speed); 
+  void backward();
+  void backward(int speed); 
 
 private:
-  Servo servo;
 
 };
 

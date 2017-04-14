@@ -1,21 +1,12 @@
 #include "Arduino.h"
 #include <EBot.h>
 
-#define Echo  A4
-#define Trig  A5
-#define ServoPin  3
-#define LightSensor1  10
-#define LightSensor2  4
-#define LightSensor3  2
-#define receiverpin 12
-
 int IN1 = 6;
 int IN2 = 7;
 int IN3 = 8;
 int IN4 = 9;
 int ENA = 5;
 int ENB = 11;
-IRrecv irrecv(receiverpin);
 
 EBot::EBot() {
 }
@@ -30,11 +21,6 @@ void EBot::begin() {
   pinMode(IN4, OUTPUT);
   pinMode(ENA, OUTPUT);
   pinMode(ENB, OUTPUT);
-  pinMode(Echo, INPUT);
-  pinMode(Trig, OUTPUT);
-  servo.attach(ServoPin);
-  servo.write(90);
-  irrecv.enableIRIn();
 }
 
 void EBot::rightWheelForward() {
@@ -94,5 +80,41 @@ void EBot::leftWheelBackward(int speed) {
 void EBot::leftWheelStop() {
   digitalWrite(ENB,LOW);
   digitalWrite(IN3,LOW);
+  digitalWrite(IN4,LOW);
+}
+
+void EBot::forward() {
+  digitalWrite(ENA,HIGH);
+  digitalWrite(IN1,HIGH);
+  digitalWrite(IN2,LOW);
+  digitalWrite(ENB,HIGH);
+  digitalWrite(IN3,LOW);
+  digitalWrite(IN4,HIGH);
+}
+
+void EBot::forward(int speed) {
+  analogWrite(ENA, speed);
+  digitalWrite(IN1,HIGH);
+  digitalWrite(IN2,LOW);
+  analogWrite(ENB, speed);
+  digitalWrite(IN3,LOW);
+  digitalWrite(IN4,HIGH);
+}
+
+void EBot::backward() {
+  digitalWrite(ENA,HIGH);
+  digitalWrite(IN1,LOW);
+  digitalWrite(IN2,HIGH);
+  digitalWrite(ENB,HIGH);
+  digitalWrite(IN3,HIGH);
+  digitalWrite(IN4,LOW);
+}
+
+void EBot::backward(int speed) {
+  analogWrite(ENA, speed);
+  digitalWrite(IN1,LOW);
+  digitalWrite(IN2,HIGH);
+  analogWrite(ENB, speed);
+  digitalWrite(IN3,HIGH);
   digitalWrite(IN4,LOW);
 }
