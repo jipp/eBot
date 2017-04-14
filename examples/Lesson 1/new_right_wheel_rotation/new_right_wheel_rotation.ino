@@ -1,6 +1,7 @@
 #include "Arduino.h"
 #include <EBot.h>
 
+int speed = 150;
 EBot eBot = EBot();
 
 void setup() {
@@ -16,11 +17,11 @@ void loop() {
   delay(500);
   eBot.rightWheelStop();
   delay(500);
-  eBot.rightWheelForward(150);
+  eBot.rightWheelForward(speed);
   delay(500);
   eBot.rightWheelStop();
   delay(500);
-  eBot.rightWheelBackward(150);
+  eBot.rightWheelBackward(speed);
   delay(500);
   eBot.rightWheelStop();
   delay(500);
