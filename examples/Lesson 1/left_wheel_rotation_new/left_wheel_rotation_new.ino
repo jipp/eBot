@@ -6,15 +6,14 @@ EBot eBot = EBot();
 
 void setup() {
   eBot.init();
-  eBot.move(true);
 }
 
 void loop() {
-  eBot.leftWheelForward();
+  eBot.leftWheelForward(true);
   delay(500);
   eBot.stop();
   delay(500);
-  eBot.leftWheelBackward();
+  eBot.leftWheelBackward(true);
   delay(500);
   eBot.stop();
   delay(500);

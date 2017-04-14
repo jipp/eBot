@@ -5,49 +5,25 @@
 #include <Servo.h>
 #include <IRremote.h>
 
-#define ENA 5
-#define ENB 11
-#define IN1 6
-#define IN2 7
-#define IN3 8
-#define IN4 9
-#define Echo  A4
-#define Trig  A5
-#define ServoPin  3
-#define LightSensor1  10
-#define LightSensor2  4
-#define LightSensor3  2
-#define receiverpin 12
-
 class EBot {
 public:
   EBot();
   ~EBot();
 
-  enum line { OK, RIGHT, LEFT, NOK};
-
-  void init();
-  void move(bool speed);
-  void move(int speed);
-  void stop();
-  void leftWheelForward();
-  void leftWheelBackward();
+  void begin();
   void rightWheelForward();
+  void rightWheelForward(int speed);
   void rightWheelBackward();
-  void forward();
-  void backward();
-  void turnLeft();
-  void turnRight();
-  void barkLeft();
-  void barkRight();
-  float distance();
-  void servoRotate(int angle);
-  line followLine();
-  unsigned long decode();
+  void rightWheelBackward(int speed);
+  void rightWheelStop();
+  void leftWheelForward();
+  void leftWheelForward(int speed);
+  void leftWheelBackward();
+  void leftWheelBackward(int speed);
+  void leftWheelStop();
 
 private:
   Servo servo;
-  IRrecv irrecv(receiverpin);
 
 };
 

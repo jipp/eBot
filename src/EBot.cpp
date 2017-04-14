@@ -1,14 +1,29 @@
 #include "Arduino.h"
 #include <EBot.h>
 
+#define Echo  A4
+#define Trig  A5
+#define ServoPin  3
+#define LightSensor1  10
+#define LightSensor2  4
+#define LightSensor3  2
+#define receiverpin 12
+
+int IN1 = 6;
+int IN2 = 7;
+int IN3 = 8;
+int IN4 = 9;
+int ENA = 5;
+int ENB = 11;
+IRrecv irrecv(receiverpin);
+
 EBot::EBot() {
 }
 
 EBot::~EBot() {
-  servo.detach();
 }
 
-void EBot::init() {
+void EBot::begin() {
   pinMode(IN1, OUTPUT);
   pinMode(IN2, OUTPUT);
   pinMode(IN3, OUTPUT);
@@ -22,130 +37,62 @@ void EBot::init() {
   irrecv.enableIRIn();
 }
 
-EBot::~EBot() {
-  servo.detach();
-}
-
-void EBot::move(bool speed) {
-  digitalWrite(ENA, speed);
-  digitalWrite(ENB, speed);
-}
-
-void EBot::move(int speed) {
-  analogWrite(ENA, speed);
-  analogWrite(ENB, speed);
-}
-
-void EBot::stop() {
-  digitalWrite(IN1, LOW);
-  digitalWrite(IN2, LOW);
-  digitalWrite(IN3, LOW);
-  digitalWrite(IN4, LOW);
-}
-
-void EBot::leftWheelForward() {
-  digitalWrite(IN3,LOW);
-  digitalWrite(IN4,HIGH);
-}
-
-void EBot::leftWheelBackward() {
-  digitalWrite(IN3,HIGH);
-  digitalWrite(IN4,LOW);
-}
-
 void EBot::rightWheelForward() {
+  digitalWrite(ENA,HIGH);
+  digitalWrite(IN1,HIGH);
+  digitalWrite(IN2,LOW);
+}
+
+void EBot::rightWheelForward(int speed) {
+  analogWrite(ENA, speed);
   digitalWrite(IN1,HIGH);
   digitalWrite(IN2,LOW);
 }
 
 void EBot::rightWheelBackward() {
+  digitalWrite(ENA,HIGH);
   digitalWrite(IN1,LOW);
   digitalWrite(IN2,HIGH);
 }
 
-void EBot::forward() {
-  digitalWrite(IN1, HIGH);
-  digitalWrite(IN2, LOW);
-  digitalWrite(IN3, LOW);
-  digitalWrite(IN4, HIGH);
+void EBot::rightWheelBackward(int speed) {
+  analogWrite(ENA, speed);
+  digitalWrite(IN1,LOW);
+  digitalWrite(IN2,HIGH);
 }
 
-void EBot::backward() {
-  digitalWrite(IN1, LOW);
-  digitalWrite(IN2, HIGH);
-  digitalWrite(IN3, HIGH);
-  digitalWrite(IN4, LOW);
+void EBot::rightWheelStop() {
+  digitalWrite(ENA,LOW);
+  digitalWrite(IN1,LOW);
+  digitalWrite(IN2,LOW);
 }
 
-void EBot::turnLeft() {
-  digitalWrite(IN1, HIGH);
-  digitalWrite(IN2, LOW);
-  digitalWrite(IN3, LOW);
-  digitalWrite(IN4, LOW);
+void EBot::leftWheelForward() {
+  digitalWrite(ENB,HIGH);
+  digitalWrite(IN3,LOW);
+  digitalWrite(IN4,HIGH);
 }
 
-void EBot::turnRight() {
-  digitalWrite(IN1, LOW);
-  digitalWrite(IN2, LOW);
-  digitalWrite(IN3, LOW);
-  digitalWrite(IN4, HIGH);
+void EBot::leftWheelForward(int speed) {
+  analogWrite(ENB, speed);
+  digitalWrite(IN3,LOW);
+  digitalWrite(IN4,HIGH);
 }
 
-void EBot::barkLeft() {
-  digitalWrite(IN1, HIGH);
-  digitalWrite(IN2, LOW);
-  digitalWrite(IN3, HIGH);
-  digitalWrite(IN4, LOW);
+void EBot::leftWheelBackward() {
+  digitalWrite(ENB,HIGH);
+  digitalWrite(IN3,HIGH);
+  digitalWrite(IN4,LOW);
 }
 
-void EBot::barkRight() {
-  digitalWrite(IN1, LOW);
-  digitalWrite(IN2, HIGH);
-  digitalWrite(IN3, LOW);
-  digitalWrite(IN4, HIGH);
+void EBot::leftWheelBackward(int speed) {
+  analogWrite(ENB, speed);
+  digitalWrite(IN3,HIGH);
+  digitalWrite(IN4,LOW);
 }
 
-float EBot::distance() {
-  float distance = 0.0;
-
-  digitalWrite(Trig, LOW);
-  delayMicroseconds(20);
-  digitalWrite(Trig, HIGH);
-  distance = pulseIn(Echo, HIGH);
-
-  return distance/58;
-}
-
-void EBot::servoRotate(int angle) {
-  angle = angle < 0 ? 0 : angle;
-  angle = angle > 180 ? 180 : angle;
-
-  servo.write(angle);
-}
-
-EBot::line EBot::followLine() {
-  int ls1 = digitalRead(LightSensor1);
-  int ls2 = digitalRead(LightSensor2);
-  int ls3 = digitalRead(LightSensor3);
-
-  if (ls1 && ls2 & !ls3) {
-    return EBot::LEFT;
-  } else if (!ls1 && ls2 && ls3) {
-    return EBot::RIGHT;
-  } else {
-    return EBot::OK;
-  }
-}
-
-unsigned long EBot::decode() {
-  decode_results results;
-  unsigned long decode;
-
-  if (irrecv.decode(&results)) {
-    decode = results.value;
-    irrecv.resume();
-    return decode;
-  }
-
-  return 0;
+void EBot::leftWheelStop() {
+  digitalWrite(ENB,LOW);
+  digitalWrite(IN3,LOW);
+  digitalWrite(IN4,LOW);
 }
