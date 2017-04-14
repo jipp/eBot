@@ -2,6 +2,7 @@
 #include <EBot.h>
 
 int speed = 150;
+
 EBot eBot = EBot();
 
 void setup() {

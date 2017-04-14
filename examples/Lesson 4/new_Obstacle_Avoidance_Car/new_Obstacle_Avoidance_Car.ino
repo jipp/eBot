@@ -3,16 +3,13 @@
 
 int speed = 150;
 unsigned long distanceWarning = 40;
-EBot eBot = EBot();
-
 int Echo = A4;
 int Trig = A5;
 unsigned long rightDistance = 0,leftDistance = 0,middleDistance = 0 ;
 
+EBot eBot = EBot();
+
 void setup() {
-  eBot.begin();
-  pinMode(Echo, INPUT);
-  pinMode(Trig, OUTPUT);
   eBot.begin();
   eBot.stop();
 }
