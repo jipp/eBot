@@ -2,6 +2,7 @@
 #define EBot_h
 
 #include "Arduino.h"
+#include <Servo.h>
 
 class EBot {
 public:
@@ -9,6 +10,7 @@ public:
   ~EBot();
 
   void begin();
+  void stop();
   void rightWheelForward();
   void rightWheelForward(int speed);
   void rightWheelBackward();
@@ -20,11 +22,18 @@ public:
   void leftWheelBackward(int speed);
   void leftWheelStop();
   void forward();
-  void forward(int speed); 
+  void forward(int speed);
   void backward();
-  void backward(int speed); 
+  void backward(int speed);
+  void rotateRight();
+  void rotateRight(int speed);
+  void rotateLeft();
+  void rotateLeft(int speed);
+  void write(int angle);
+  unsigned long distance();
 
 private:
+  Servo servo;
 
 };
 
