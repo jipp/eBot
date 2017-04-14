@@ -22,6 +22,7 @@ rotateRight	KEYWORD2
 rotateLeft	KEYWORD2
 write	KEYWORD2
 distance	KEYWORD2
+decode	KEYWORD2
 
 #######################################
 # Constants (LITERAL1)

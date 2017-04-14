@@ -13,6 +13,10 @@
 #define Echo	A4
 #define Trig	A5
 
+#define receiverpin	12
+
+IRrecv irrecv(receiverpin);
+
 EBot::EBot() {
 }
 
@@ -26,10 +30,11 @@ void EBot::begin() {
   pinMode(IN4, OUTPUT);
   pinMode(ENA, OUTPUT);
   pinMode(ENB, OUTPUT);
-  pinMode(Echo, INPUT);    
-  pinMode(Trig, OUTPUT);  
+  pinMode(Echo, INPUT);
+  pinMode(Trig, OUTPUT);
   servo.attach(ServoPin);
   servo.write(90);
+  irrecv.enableIRIn();
 }
 
 void EBot::stop() {
@@ -191,4 +196,19 @@ unsigned long EBot::distance() {
   duration = pulseIn(Echo, HIGH);
 
   return duration / 29 / 2;
+}
+
+unsigned long EBot::decode() {
+  decode_results results;
+  unsigned long decode = 0;
+
+  if (irrecv.decode(&results)) {
+    decode = results.value;
+    irrecv.resume();
+    if (decode == 4294967295) {
+      decode = 0;
+    }
+  }
+
+  return decode;
 }
