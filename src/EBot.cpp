@@ -54,6 +54,7 @@ void EBot::rightWheelForward() {
 }
 
 void EBot::rightWheelForward(int speed) {
+  speed = boundaries(speed, 0, 255);
   analogWrite(ENA, speed);
   digitalWrite(IN1, HIGH);
   digitalWrite(IN2, LOW);
@@ -66,6 +67,8 @@ void EBot::rightWheelBackward() {
 }
 
 void EBot::rightWheelBackward(int speed) {
+  speed = boundaries(speed, 0, 255);
+
   analogWrite(ENA, speed);
   digitalWrite(IN1, LOW);
   digitalWrite(IN2, HIGH);
@@ -84,6 +87,8 @@ void EBot::leftWheelForward() {
 }
 
 void EBot::leftWheelForward(int speed) {
+  speed = boundaries(speed, 0, 255);
+
   analogWrite(ENB, speed);
   digitalWrite(IN3, LOW);
   digitalWrite(IN4, HIGH);
@@ -96,6 +101,8 @@ void EBot::leftWheelBackward() {
 }
 
 void EBot::leftWheelBackward(int speed) {
+  speed = boundaries(speed, 0, 255);
+
   analogWrite(ENB, speed);
   digitalWrite(IN3, HIGH);
   digitalWrite(IN4, LOW);
@@ -117,6 +124,8 @@ void EBot::forward() {
 }
 
 void EBot::forward(int speed) {
+  speed = boundaries(speed, 0, 255);
+
   analogWrite(ENA, speed);
   digitalWrite(IN1, HIGH);
   digitalWrite(IN2, LOW);
@@ -135,6 +144,8 @@ void EBot::backward() {
 }
 
 void EBot::backward(int speed) {
+  speed = boundaries(speed, 0, 255);
+
   analogWrite(ENA, speed);
   digitalWrite(IN1, LOW);
   digitalWrite(IN2, HIGH);
@@ -153,6 +164,8 @@ void EBot::rotateRight() {
 }
 
 void EBot::rotateRight(int speed) {
+  speed = boundaries(speed, 0, 255);
+
   analogWrite(ENA, speed);
   digitalWrite(IN1, LOW);
   digitalWrite(IN2, HIGH);
@@ -171,6 +184,8 @@ void EBot::rotateLeft() {
 }
 
 void EBot::rotateLeft(int speed) {
+  speed = boundaries(speed, 0, 255);
+
   analogWrite(ENA, speed);
   digitalWrite(IN1, HIGH);
   digitalWrite(IN2, LOW);
@@ -180,8 +195,7 @@ void EBot::rotateLeft(int speed) {
 }
 
 void EBot::write(int angle) {
-  angle = angle < 0 ? 0 : angle;
-  angle = angle > 180 ? 180 : angle;
+  angle = boundaries(angle, 0, 180);
 
   servo.write(angle);
 }
@@ -209,4 +223,11 @@ bool EBot::readLS2() {
 
 bool EBot::readLS3() {
   return digitalRead(LS3);
+}
+
+int EBot::boundaries(int value, int min, int max) {
+  value = value < min ? min : value;
+  value = value > max ? max : value;
+
+  return value;
 }
