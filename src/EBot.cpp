@@ -15,7 +15,9 @@
 
 #define receiverpin	12
 
-IRrecv irrecv(receiverpin);
+#define LS1 10
+#define LS2 4
+#define LS3 2
 
 EBot::EBot() {
 }
@@ -34,7 +36,6 @@ void EBot::begin() {
   pinMode(Trig, OUTPUT);
   servo.attach(ServoPin);
   servo.write(90);
-  irrecv.enableIRIn();
 }
 
 void EBot::stop() {
@@ -198,17 +199,14 @@ unsigned long EBot::distance() {
   return duration / 29 / 2;
 }
 
-unsigned long EBot::decode() {
-  decode_results results;
-  unsigned long decode = 0;
+bool EBot::readLS1() {
+  return digitalRead(LS1);
+}
 
-  if (irrecv.decode(&results)) {
-    decode = results.value;
-    irrecv.resume();
-    if (decode == 4294967295) {
-      decode = 0;
-    }
-  }
+bool EBot::readLS2() {
+  return digitalRead(LS2);
+}
 
-  return decode;
+bool EBot::readLS3() {
+  return digitalRead(LS3);
 }

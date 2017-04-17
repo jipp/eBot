@@ -3,9 +3,11 @@
 
 #include "Arduino.h"
 #include <Servo.h>
-#include <IRremote.h>
 
 class EBot {
+private:
+  Servo servo;
+
 public:
   EBot();
   ~EBot();
@@ -32,10 +34,10 @@ public:
   void rotateLeft(int speed);
   void write(int angle);
   unsigned long distance();
-  unsigned long decode();
+  bool readLS1();
+  bool readLS2();
+  bool readLS3();
 
-private:
-  Servo servo;
 };
 
 #endif
