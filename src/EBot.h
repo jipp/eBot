@@ -7,6 +7,7 @@
 class EBot {
 private:
   Servo servo;
+  static int boundaries(int value, int min, int max);
 
 public:
   EBot();
@@ -30,14 +31,17 @@ public:
   void backward(int speed);
   void rotateRight();
   void rotateRight(int speed);
+  void turnRight();
+  void turnRight(int speed);
   void rotateLeft();
   void rotateLeft(int speed);
+  void turnLeft();
+  void turnLeft(int speed);
   void write(int angle);
   unsigned long distance();
   bool readLS1();
   bool readLS2();
   bool readLS3();
-
 };
 
 #endif

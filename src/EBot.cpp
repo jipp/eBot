@@ -174,6 +174,26 @@ void EBot::rotateRight(int speed) {
   digitalWrite(IN4, HIGH);
 }
 
+void EBot::turnRight() {
+  digitalWrite(ENA, LOW);
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, LOW);
+  digitalWrite(ENB, HIGH);
+  digitalWrite(IN3, LOW);
+  digitalWrite(IN4, HIGH);
+}
+
+void EBot::turnRight(int speed) {
+  speed = boundaries(speed, 0, 255);
+
+  digitalWrite(ENA, LOW);
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, LOW);
+  analogWrite(ENB, speed);
+  digitalWrite(IN3, LOW);
+  digitalWrite(IN4, HIGH);
+}
+
 void EBot::rotateLeft() {
   digitalWrite(ENA, HIGH);
   digitalWrite(IN1, HIGH);
@@ -191,6 +211,26 @@ void EBot::rotateLeft(int speed) {
   digitalWrite(IN2, LOW);
   analogWrite(ENB, speed);
   digitalWrite(IN3, HIGH);
+  digitalWrite(IN4, LOW);
+}
+
+void EBot::turnLeft() {
+  digitalWrite(ENA, HIGH);
+  digitalWrite(IN1, HIGH);
+  digitalWrite(IN2, LOW);
+  digitalWrite(ENB, LOW);
+  digitalWrite(IN3, LOW);
+  digitalWrite(IN4, LOW);
+}
+
+void EBot::turnLeft(int speed) {
+  speed = boundaries(speed, 0, 255);
+
+  analogWrite(ENA, speed);
+  digitalWrite(IN1, HIGH);
+  digitalWrite(IN2, LOW);
+  digitalWrite(ENB, LOW);
+  digitalWrite(IN3, LOW);
   digitalWrite(IN4, LOW);
 }
 
