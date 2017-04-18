@@ -39,18 +39,20 @@ void EBot::begin() {
 }
 
 void EBot::stop() {
+  leftWheelStop();
+  rightWheelStop();
+}
+
+void EBot::rightWheelStop() {
   digitalWrite(ENA, LOW);
   digitalWrite(IN1, LOW);
   digitalWrite(IN2, LOW);
+}
+
+void EBot::leftWheelStop() {
   digitalWrite(ENB, LOW);
   digitalWrite(IN3, LOW);
   digitalWrite(IN4, LOW);
-}
-
-void EBot::rightWheelForward() {
-  digitalWrite(ENA, HIGH);
-  digitalWrite(IN1, HIGH);
-  digitalWrite(IN2, LOW);
 }
 
 void EBot::rightWheelForward(int speed) {
@@ -58,12 +60,6 @@ void EBot::rightWheelForward(int speed) {
   analogWrite(ENA, speed);
   digitalWrite(IN1, HIGH);
   digitalWrite(IN2, LOW);
-}
-
-void EBot::rightWheelBackward() {
-  digitalWrite(ENA, HIGH);
-  digitalWrite(IN1, LOW);
-  digitalWrite(IN2, HIGH);
 }
 
 void EBot::rightWheelBackward(int speed) {
@@ -74,30 +70,12 @@ void EBot::rightWheelBackward(int speed) {
   digitalWrite(IN2, HIGH);
 }
 
-void EBot::rightWheelStop() {
-  digitalWrite(ENA, LOW);
-  digitalWrite(IN1, LOW);
-  digitalWrite(IN2, LOW);
-}
-
-void EBot::leftWheelForward() {
-  digitalWrite(ENB, HIGH);
-  digitalWrite(IN3, LOW);
-  digitalWrite(IN4, HIGH);
-}
-
 void EBot::leftWheelForward(int speed) {
   speed = boundaries(speed, 0, 255);
 
   analogWrite(ENB, speed);
   digitalWrite(IN3, LOW);
   digitalWrite(IN4, HIGH);
-}
-
-void EBot::leftWheelBackward() {
-  digitalWrite(ENB, HIGH);
-  digitalWrite(IN3, HIGH);
-  digitalWrite(IN4, LOW);
 }
 
 void EBot::leftWheelBackward(int speed) {
@@ -108,134 +86,38 @@ void EBot::leftWheelBackward(int speed) {
   digitalWrite(IN4, LOW);
 }
 
-void EBot::leftWheelStop() {
-  digitalWrite(ENB, LOW);
-  digitalWrite(IN3, LOW);
-  digitalWrite(IN4, LOW);
-}
-
-void EBot::forward() {
-  digitalWrite(ENA, HIGH);
-  digitalWrite(IN1, HIGH);
-  digitalWrite(IN2, LOW);
-  digitalWrite(ENB, HIGH);
-  digitalWrite(IN3, LOW);
-  digitalWrite(IN4, HIGH);
-}
-
 void EBot::forward(int speed) {
-  speed = boundaries(speed, 0, 255);
-
-  analogWrite(ENA, speed);
-  digitalWrite(IN1, HIGH);
-  digitalWrite(IN2, LOW);
-  analogWrite(ENB, speed);
-  digitalWrite(IN3, LOW);
-  digitalWrite(IN4, HIGH);
-}
-
-void EBot::backward() {
-  digitalWrite(ENA, HIGH);
-  digitalWrite(IN1, LOW);
-  digitalWrite(IN2, HIGH);
-  digitalWrite(ENB, HIGH);
-  digitalWrite(IN3, HIGH);
-  digitalWrite(IN4, LOW);
+  leftWheelForward(speed);
+  rightWheelForward(speed);
 }
 
 void EBot::backward(int speed) {
-  speed = boundaries(speed, 0, 255);
-
-  analogWrite(ENA, speed);
-  digitalWrite(IN1, LOW);
-  digitalWrite(IN2, HIGH);
-  analogWrite(ENB, speed);
-  digitalWrite(IN3, HIGH);
-  digitalWrite(IN4, LOW);
-}
-
-void EBot::rotateRight() {
-  digitalWrite(ENA, HIGH);
-  digitalWrite(IN1, LOW);
-  digitalWrite(IN2, HIGH);
-  digitalWrite(ENB, HIGH);
-  digitalWrite(IN3, LOW);
-  digitalWrite(IN4, HIGH);
+  leftWheelBackward(speed);
+  rightWheelBackward(speed);
 }
 
 void EBot::rotateRight(int speed) {
-  speed = boundaries(speed, 0, 255);
-
-  analogWrite(ENA, speed);
-  digitalWrite(IN1, LOW);
-  digitalWrite(IN2, HIGH);
-  analogWrite(ENB, speed);
-  digitalWrite(IN3, LOW);
-  digitalWrite(IN4, HIGH);
-}
-
-void EBot::turnRight() {
-  digitalWrite(ENA, LOW);
-  digitalWrite(IN1, LOW);
-  digitalWrite(IN2, LOW);
-  digitalWrite(ENB, HIGH);
-  digitalWrite(IN3, LOW);
-  digitalWrite(IN4, HIGH);
+  leftWheelForward(speed);
+  rightWheelBackward(speed);
 }
 
 void EBot::turnRight(int speed) {
-  speed = boundaries(speed, 0, 255);
-
-  digitalWrite(ENA, LOW);
-  digitalWrite(IN1, LOW);
-  digitalWrite(IN2, LOW);
-  analogWrite(ENB, speed);
-  digitalWrite(IN3, LOW);
-  digitalWrite(IN4, HIGH);
-}
-
-void EBot::rotateLeft() {
-  digitalWrite(ENA, HIGH);
-  digitalWrite(IN1, HIGH);
-  digitalWrite(IN2, LOW);
-  digitalWrite(ENB, HIGH);
-  digitalWrite(IN3, HIGH);
-  digitalWrite(IN4, LOW);
+  leftWheelForward(speed);
+  rightWheelStop();
 }
 
 void EBot::rotateLeft(int speed) {
-  speed = boundaries(speed, 0, 255);
-
-  analogWrite(ENA, speed);
-  digitalWrite(IN1, HIGH);
-  digitalWrite(IN2, LOW);
-  analogWrite(ENB, speed);
-  digitalWrite(IN3, HIGH);
-  digitalWrite(IN4, LOW);
-}
-
-void EBot::turnLeft() {
-  digitalWrite(ENA, HIGH);
-  digitalWrite(IN1, HIGH);
-  digitalWrite(IN2, LOW);
-  digitalWrite(ENB, LOW);
-  digitalWrite(IN3, LOW);
-  digitalWrite(IN4, LOW);
+  leftWheelForward();
+  rightWheelForward(speed);
 }
 
 void EBot::turnLeft(int speed) {
-  speed = boundaries(speed, 0, 255);
-
-  analogWrite(ENA, speed);
-  digitalWrite(IN1, HIGH);
-  digitalWrite(IN2, LOW);
-  digitalWrite(ENB, LOW);
-  digitalWrite(IN3, LOW);
-  digitalWrite(IN4, LOW);
+  leftWheelStop();
+  rightWheelForward(speed);
 }
 
 void EBot::write(int angle) {
-  angle = boundaries(angle, 0, 180);
+  angle = boundaries(angle, 0, 179);
 
   servo.write(angle);
 }
