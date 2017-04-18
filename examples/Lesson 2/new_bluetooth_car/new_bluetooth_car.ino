@@ -21,20 +21,20 @@ void setup() {
 
 void loop() {
   getstr=Serial.read();
-  if (getstr=='f') {
+  if (getstr == 'f') {
     eBot.forward();
-  } else if(getstr=='b') {
-    eBot.back();
+  } else if (getstr == 'b') {
+    eBot.backward();
     delay(200);
-  } else if(getstr=='l') {
+  } else if (getstr == 'l') {
     eBot.rotateLeft();
     delay(200);
-  } else if(getstr=='r') {
+  } else if (getstr == 'r') {
     eBot.rotateRight();
     delay(200);
-  } else if(getstr=='s') {
-    eBot.stop();     
-  } else if(getstr=='A') {
+  } else if (getstr == 's') {
+    eBot.stop();
+  } else if (getstr == 'A') {
     stateChange();
   }
 }

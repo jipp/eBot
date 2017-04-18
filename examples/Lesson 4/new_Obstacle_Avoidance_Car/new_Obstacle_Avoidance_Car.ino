@@ -3,8 +3,6 @@
 
 int speed = 150;
 unsigned long distanceWarning = 40;
-int Echo = A4;
-int Trig = A5;
 unsigned long rightDistance = 0,leftDistance = 0,middleDistance = 0 ;
 
 EBot eBot = EBot();
@@ -19,7 +17,7 @@ void loop() {
   delay(500);
   middleDistance = eBot.distance();
 
-  if(middleDistance<=distanceWarning) {
+  if (middleDistance <= distanceWarning) {
     eBot.stop();
     delay(500);
     eBot.write(5);
@@ -36,13 +34,13 @@ void loop() {
     delay(500);
     eBot.write(90);
     delay(1000);
-    if(rightDistance>leftDistance) {
+    if (rightDistance > leftDistance) {
       eBot.rotateRight(speed);
       delay(300);
-    } else if(rightDistance<leftDistance) {
+    } else if (rightDistance < leftDistance) {
       eBot.rotateLeft(speed);
       delay(300);
-    } else if((rightDistance<=20)||(leftDistance<=20)) {
+    } else if ((rightDistance <= 20) || (leftDistance <= 20)) {
       eBot.backward(speed);
       delay(150);
     } else {
