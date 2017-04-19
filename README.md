@@ -7,12 +7,11 @@ Library for the Elegoo Smart Robot Car V2.0. It is meant to include all function
 
 ## Needed Libraries
 the following library is needed by the eBot library - in case the lib is not installed the older Robot IRRemote lib will be used which will cause link problems!
-* [  4  ] IRremote
+* [  4  ] IRremote -> collides with wheel stearing (ongoing troubleshooting)
 
 ## The following features are implemented - prefix new_ is used to differentiate between original and modified examples
 * Lesson 1 - pure car movement
 * Lesson 2 - bluetooth
-* Lesson 3 - infrared
 * Lesson 4 - ultrasonic
 * Lesson 5 - line tracking
 
