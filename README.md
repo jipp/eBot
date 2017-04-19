@@ -12,6 +12,7 @@ the following library is needed by the eBot library - in case the lib is not ins
 ## The following features are implemented - prefix new_ is used to differentiate between original and modified examples
 * Lesson 1 - pure car movement
 * Lesson 2 - bluetooth
+* Lesson 3 - infrared -> not yet working
 * Lesson 4 - ultrasonic
 * Lesson 5 - line tracking
 
