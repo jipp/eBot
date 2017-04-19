@@ -11,6 +11,7 @@ the following library is needed by the eBot library - in case the lib is not ins
 
 For IRremore some modifications are needed from the original library:
 * for 2.3.3:
+```
 diff boarddefs.h boarddefs.h.orig
 144,145c144,145
 < 	#define IR_USE_TIMER1   // tx = pin 9
@@ -18,6 +19,7 @@ diff boarddefs.h boarddefs.h.orig
 ---
 > 	//#define IR_USE_TIMER1   // tx = pin 9
 > 	#define IR_USE_TIMER2     // tx = pin 3
+```
 
 ## The following features are implemented - prefix new_ is used to differentiate between original and modified examples
 * Lesson 1 - pure car movement
