@@ -107,7 +107,7 @@ void EBot::turnRight(int speed) {
 }
 
 void EBot::rotateLeft(int speed) {
-  leftWheelForward();
+  leftWheelBackward(speed);
   rightWheelForward(speed);
 }
 
