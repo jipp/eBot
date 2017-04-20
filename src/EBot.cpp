@@ -23,6 +23,8 @@ void EBot::begin() {
   pinMode(Trig, OUTPUT);
   servo.attach(ServoPin);
   servo.write(90);
+  this->setDirection();
+  this->setSpeed();
   #ifdef WOKE
   irrecv.enableIRIn();
   #endif
@@ -159,7 +161,7 @@ void EBot::rightWheelBackward(int speed) {
 void EBot::setAngle(int angle) {
   angle = boundaries(angle, 0, 179);
 
-  servo.write(angle);
+  this->servo.write(angle);
 }
 
 unsigned long EBot::getDistance() {
