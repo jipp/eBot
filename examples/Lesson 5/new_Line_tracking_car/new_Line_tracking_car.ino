@@ -11,26 +11,26 @@ void setup() {
 
 void loop() {
   int num1,num2,num3;
-  num1 = readLS1();
-  num2 = readLS2();
-  num3 = readLS3();
+  num1 = eBot.readLS1();
+  num2 = eBot.readLS2();
+  num3 = eBot.readLS3();
   if ((num1 == 0) && num2 && num3) {
-    eBot.rotateLeft();          //The sensor detected that right car turn left immediately when it meets black line
+    eBot.rotateLeft();
     delay(2);
     while(1) {
-      num2 = readLS2();         //Cycle to judge degree of intermediate sensor,
+      num2 = eBot.readLS2();
       if (num2 == 1) {
-        eBot.rotateLeft();                     //If num2==1 does not go to the middle position, continue to turn left.
+        eBot.rotateLeft();
         delay(2);
       } else {
-        break;                      //Detection of num2==0 instructions turned over, out of the loop, detection of three sensors’ statusand then make appropriate action
+        break;
       }
-    }                                       //The following and so on
+    }
   } else if (num1 && num2 && (num3 == 0)) {
     eBot.rotateRight();
     delay(2);
     while(1) {
-      num2 = readLS2();
+      num2 = eBot.readLS2();
       if (num2 == 1) {
         eBot.rotateRight();
         delay(2);

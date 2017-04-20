@@ -13,7 +13,7 @@ void setup() {
 }
 
 void loop() {
-  eBot.write(90);//setservo position according to scaled value
+  eBot.write(90);
   delay(500);
   middleDistance = eBot.distance();
 

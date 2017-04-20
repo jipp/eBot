@@ -3,19 +3,19 @@
 
 #define L 16738455
 
-volatile int state = LOW;  //define default input mode
+volatile int state = LOW;
 unsigned long RED;
 
 EBot eBot = EBot();
 
 void setup() {
-  pinMode(LED_BUILTIN, OUTPUT);     //initialize LED as an output
-  Serial.begin(9600);       // debug output at 9600 baud
+  pinMode(LED_BUILTIN, OUTPUT);
+  Serial.begin(9600);
   eBot.begin();
 }
 
 void stateChange() {
-  state = !state;          
+  state = !state;
   digitalWrite(LED_BUILTIN, state);
 }
 
@@ -24,9 +24,8 @@ void loop() {
   if (RED != 0) {
     Serial.println(RED);
   }
-  if (RED == L) {  
+  if (RED == L) {
     Serial.println("state changed!");
     stateChange();
   }
 }
-

@@ -1,9 +1,8 @@
 #include "Arduino.h"
 #include <EBot.h>
 
-volatile int state = LOW;//The initial state of the function is defined as a low level
-char getstr;    //Defines a function that receives the Bluetooth character
-int speed = 150;
+volatile int state = LOW;
+char getstr;
 
 EBot eBot = EBot();
 
@@ -13,28 +12,32 @@ void stateChange() {
 }
 
 void setup() {
-  pinMode(LED_BUILTIN, OUTPUT);     //initialize LED as an output
-  Serial.begin(9600);       // debug output at 9600 baud
+  pinMode(LED_BUILTIN, OUTPUT);
+  Serial.begin(9600);
   eBot.begin();
   eBot.stop();
 }
 
 void loop() {
   getstr=Serial.read();
-  if (getstr == 'f') {
+  switch (getstr) {
+    case 'f':
     eBot.forward();
-  } else if (getstr == 'b') {
+    break;
+    case 'b':
     eBot.backward();
-    delay(200);
-  } else if (getstr == 'l') {
-    eBot.rotateLeft();
-    delay(200);
-  } else if (getstr == 'r') {
-    eBot.rotateRight();
-    delay(200);
-  } else if (getstr == 's') {
+    break;
+    case 'l':
+    eBot.rotateLeft(150);
+    break;
+    case 'r':
+    eBot.rotateRight(150);
+    break;
+    case 's':
     eBot.stop();
-  } else if (getstr == 'A') {
+    break;
+    case 'A':
     stateChange();
+    break;
   }
 }

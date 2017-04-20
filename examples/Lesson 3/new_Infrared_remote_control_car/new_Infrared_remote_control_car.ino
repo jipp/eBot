@@ -13,15 +13,15 @@ unsigned long RED;
 EBot eBot = EBot();
 
 void setup() {
-  pinMode(LED_BUILTIN, OUTPUT);     //initialize LED as an output
-  Serial.begin(9600);       // debug output at 9600 baud
+  pinMode(LED_BUILTIN, OUTPUT);
+  Serial.begin(9600);
   eBot.begin();
   eBot.stop();
 }
 
 void loop() {
   RED = eBot.decode();
-  if(RED==A) {  
+  if(RED==A) {
     Serial.println("A");
     eBot.forward();
   } else if(RED==B) {
@@ -33,9 +33,8 @@ void loop() {
   } else if(RED==D) {
     Serial.println("D");
     eBot.rotateRight();
-  } else if(RED==X) { 
+  } else if(RED==X) {
     Serial.println("X");
     eBot.stop();
   }
-} 
-
+}
