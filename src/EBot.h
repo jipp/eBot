@@ -32,10 +32,13 @@ private:
   static int boundaries(int value, int min, int max);
 
 public:
+  enum direction { STOP, FORWARD, BACKWARD, TURNLEFT, TURNRIGHT, ROTATELEFT, ROTATERIGHT };
   EBot();
   ~EBot();
 
   void begin();
+  void setDirection(direction move);
+  void setSpeed(int speed = 255);
   void stop();
   void rightWheelStop();
   void leftWheelStop();

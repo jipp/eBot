@@ -28,6 +28,14 @@ void EBot::begin() {
   #endif
 }
 
+void EBot::setDirection(EBot::direction move) {
+
+}
+
+void EBot::setSpeed(int speed) {
+
+}
+
 void EBot::stop() {
   leftWheelStop();
   rightWheelStop();
