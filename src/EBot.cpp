@@ -1,23 +1,10 @@
 #include "Arduino.h"
 #include <EBot.h>
 
-#define IN1	6
-#define IN2	7
-#define IN3	8
-#define IN4	9
-#define ENA	5
-#define ENB	11
-
-#define	ServoPin	3
-
-#define Echo	A4
-#define Trig	A5
-
-#define receiverpin	12
-
-#define LS1 10
-#define LS2 4
-#define LS3 2
+#ifdef WOKE
+IRrecv irrecv(receiverpin);
+decode_results results;
+#endif
 
 EBot::EBot() {
 }
@@ -36,6 +23,9 @@ void EBot::begin() {
   pinMode(Trig, OUTPUT);
   servo.attach(ServoPin);
   servo.write(90);
+  #ifdef WOKE
+  irrecv.enableIRIn();
+  #endif
 }
 
 void EBot::stop() {
@@ -151,5 +141,16 @@ int EBot::boundaries(int value, int min, int max) {
   value = value < min ? min : value;
   value = value > max ? max : value;
 
+  return value;
+}
+
+unsigned long EBot::result() {
+  unsigned long value = 0;
+  #ifdef WOKE
+  if (irrecv.decode(&results)) {
+      value = results.value;
+      irrecv.resume(); // Receive the next value
+    }
+  #endif
   return value;
 }
