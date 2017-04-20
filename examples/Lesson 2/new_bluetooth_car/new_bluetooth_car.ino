@@ -15,26 +15,30 @@ void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
   Serial.begin(9600);
   eBot.begin();
-  eBot.stop();
+  eBot.setDirection();
 }
 
 void loop() {
   getstr=Serial.read();
   switch (getstr) {
     case 'f':
-    eBot.forward();
+    eBot.setSpeed();
+    eBot.setDirection(EBot::FORWARD);
     break;
     case 'b':
-    eBot.backward();
+    eBot.setSpeed();
+    eBot.setDirection(EBot::BACKWARD);
     break;
     case 'l':
-    eBot.rotateLeft(150);
+    eBot.setSpeed(150);
+    eBot.setDirection(EBot::ROTATELEFT);
     break;
     case 'r':
-    eBot.rotateRight(150);
+    eBot.setSpeed(150);
+    eBot.setDirection(EBot::ROTATERIGHT);
     break;
     case 's':
-    eBot.stop();
+    eBot.setDirection();
     break;
     case 'A':
     stateChange();

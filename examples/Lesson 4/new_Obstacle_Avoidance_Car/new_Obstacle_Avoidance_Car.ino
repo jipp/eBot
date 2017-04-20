@@ -9,44 +9,45 @@ EBot eBot = EBot();
 
 void setup() {
   eBot.begin();
-  eBot.stop();
+  eBot.setSpeed(speed);
+  eBot.setDirection();
 }
 
 void loop() {
-  eBot.write(90);
+  eBot.setAngle(90);
   delay(500);
-  middleDistance = eBot.distance();
+  middleDistance = eBot.getDistance();
 
   if (middleDistance <= distanceWarning) {
-    eBot.stop();
+    eBot.setDirection();
     delay(500);
-    eBot.write(5);
+    eBot.setAngle(5);
     delay(1000);
-    rightDistance = eBot.distance();
+    rightDistance = eBot.getDistance();
 
     delay(500);
-    eBot.write(90);
+    eBot.setAngle(90);
     delay(1000);
-    eBot.write(180);
+    eBot.setAngle(180);
     delay(1000);
-    leftDistance = eBot.distance();
+    leftDistance = eBot.getDistance();
 
     delay(500);
-    eBot.write(90);
+    eBot.setAngle(90);
     delay(1000);
     if (rightDistance > leftDistance) {
-      eBot.rotateRight(speed);
+      eBot.setDirection(EBot::ROTATERIGHT);
       delay(300);
     } else if (rightDistance < leftDistance) {
-      eBot.rotateLeft(speed);
+      eBot.setDirection(EBot::ROTATELEFT);
       delay(300);
     } else if ((rightDistance <= 20) || (leftDistance <= 20)) {
-      eBot.backward(speed);
+      eBot.setDirection(EBot::BACKWARD);
       delay(150);
     } else {
-      eBot.forward(speed);
+      eBot.setDirection(EBot::FORWARD);
     }
   } else {
-    eBot.forward(speed);
+    eBot.setDirection(EBot::FORWARD);
   }
 }

@@ -28,36 +28,52 @@
 
 class EBot {
 private:
+  int speed = 255;
   Servo servo;
   static int boundaries(int value, int min, int max);
+  void stop();
+  void forward(int speed = 255);
+  void backward(int speed = 255);
+  void turnLeft(int speed = 255);
+  void turnRight(int speed = 255);
+  void rotateLeft(int speed = 255);
+  void rotateRight(int speed = 255);
+  void leftWheelStop();
+  void rightWheelStop();
+  void leftWheelForward(int speed = 255);
+  void rightWheelForward(int speed = 255);
+  void leftWheelBackward(int speed = 255);
+  void rightWheelBackward(int speed = 255);
 
 public:
-  enum direction { STOP, FORWARD, BACKWARD, TURNLEFT, TURNRIGHT, ROTATELEFT, ROTATERIGHT };
   EBot();
   ~EBot();
 
+  enum direction {
+    STOP,
+    FORWARD,
+    BACKWARD,
+    TURNLEFT,
+    TURNRIGHT,
+    ROTATELEFT,
+    ROTATERIGHT,
+    LEFTWHEELSTOP,
+    RIGHTWHEELSTOP,
+    LEFTWHEELFORWARD,
+    RIGHTWHEELFORWARD,
+    LEFTWHEELBACKWARD,
+    RIGHTWHEELBACKWARD
+  };
+
   void begin();
-  void setDirection(direction move);
+  void setDirection(direction move = STOP);
   void setSpeed(int speed = 255);
-  void stop();
-  void rightWheelStop();
-  void leftWheelStop();
-  void rightWheelForward(int speed = 255);
-  void rightWheelBackward(int speed = 255);
-  void leftWheelForward(int speed = 255);
-  void leftWheelBackward(int speed = 255);
-  void forward(int speed = 255);
-  void backward(int speed = 255);
-  void rotateRight(int speed = 255);
-  void turnRight(int speed = 255);
-  void rotateLeft(int speed = 255);
-  void turnLeft(int speed = 255);
-  void write(int angle = 90);
-  unsigned long distance();
+  void setAngle(int angle = 90);
+  unsigned long getDistance();
+  unsigned long getIR();
   bool readLS1();
   bool readLS2();
   bool readLS3();
-  unsigned long result();
 };
 
 #endif

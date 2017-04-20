@@ -7,6 +7,7 @@ EBot eBot = EBot();
 
 void setup() {
   eBot.begin();
+  eBot.setSpeed(speed);
 }
 
 void loop() {
@@ -15,24 +16,24 @@ void loop() {
   num2 = eBot.readLS2();
   num3 = eBot.readLS3();
   if ((num1 == 0) && num2 && num3) {
-    eBot.rotateLeft();
+    eBot.setDirection(EBot::ROTATELEFT);
     delay(2);
     while(1) {
       num2 = eBot.readLS2();
       if (num2 == 1) {
-        eBot.rotateLeft();
+        eBot.setDirection(EBot::ROTATELEFT);
         delay(2);
       } else {
         break;
       }
     }
   } else if (num1 && num2 && (num3 == 0)) {
-    eBot.rotateRight();
+    eBot.setDirection(EBot::ROTATERIGHT);
     delay(2);
     while(1) {
       num2 = eBot.readLS2();
       if (num2 == 1) {
-        eBot.rotateRight();
+        eBot.setDirection(EBot::ROTATERIGHT);
         delay(2);
       } else {
         break;
@@ -40,7 +41,7 @@ void loop() {
     }
   }
   else {
-    eBot.forward();
+    eBot.setDirection(EBot::FORWARD);
     delay(2);
   }
 }

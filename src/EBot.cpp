@@ -29,59 +29,56 @@ void EBot::begin() {
 }
 
 void EBot::setDirection(EBot::direction move) {
-
+  switch(move) {
+    case STOP:
+    this->stop();
+    break;
+    case FORWARD:
+    this->forward(this->speed);
+    break;
+    case BACKWARD:
+    this->backward(this->speed);
+    break;
+    case TURNLEFT:
+    this->turnLeft(this->speed);
+    break;
+    case TURNRIGHT:
+    this->turnRight(this->speed);
+    break;
+    case ROTATELEFT:
+    this->rotateLeft(this->speed);
+    break;
+    case ROTATERIGHT:
+    this->rotateRight(this->speed);
+    break;
+    case LEFTWHEELSTOP:
+    this->leftWheelStop();
+    break;
+    case RIGHTWHEELSTOP:
+    this->rightWheelStop();
+    break;
+    case LEFTWHEELFORWARD:
+    this->leftWheelForward(this->speed);
+    break;
+    case RIGHTWHEELFORWARD:
+    this->rightWheelForward(this->speed);
+    break;
+    case LEFTWHEELBACKWARD:
+    this->leftWheelBackward(this->speed);
+    break;
+    case RIGHTWHEELBACKWARD:
+    this->rightWheelBackward(this->speed);
+    break;
+  }
 }
 
 void EBot::setSpeed(int speed) {
-
+  this->speed = speed;
 }
 
 void EBot::stop() {
   leftWheelStop();
   rightWheelStop();
-}
-
-void EBot::rightWheelStop() {
-  digitalWrite(ENA, LOW);
-  digitalWrite(IN1, LOW);
-  digitalWrite(IN2, LOW);
-}
-
-void EBot::leftWheelStop() {
-  digitalWrite(ENB, LOW);
-  digitalWrite(IN3, LOW);
-  digitalWrite(IN4, LOW);
-}
-
-void EBot::rightWheelForward(int speed) {
-  speed = boundaries(speed, 0, 255);
-  analogWrite(ENA, speed);
-  digitalWrite(IN1, HIGH);
-  digitalWrite(IN2, LOW);
-}
-
-void EBot::rightWheelBackward(int speed) {
-  speed = boundaries(speed, 0, 255);
-
-  analogWrite(ENA, speed);
-  digitalWrite(IN1, LOW);
-  digitalWrite(IN2, HIGH);
-}
-
-void EBot::leftWheelForward(int speed) {
-  speed = boundaries(speed, 0, 255);
-
-  analogWrite(ENB, speed);
-  digitalWrite(IN3, LOW);
-  digitalWrite(IN4, HIGH);
-}
-
-void EBot::leftWheelBackward(int speed) {
-  speed = boundaries(speed, 0, 255);
-
-  analogWrite(ENB, speed);
-  digitalWrite(IN3, HIGH);
-  digitalWrite(IN4, LOW);
 }
 
 void EBot::forward(int speed) {
@@ -94,9 +91,9 @@ void EBot::backward(int speed) {
   rightWheelBackward(speed);
 }
 
-void EBot::rotateRight(int speed) {
-  leftWheelForward(speed);
-  rightWheelBackward(speed);
+void EBot::turnLeft(int speed) {
+  leftWheelStop();
+  rightWheelForward(speed);
 }
 
 void EBot::turnRight(int speed) {
@@ -109,18 +106,63 @@ void EBot::rotateLeft(int speed) {
   rightWheelForward(speed);
 }
 
-void EBot::turnLeft(int speed) {
-  leftWheelStop();
-  rightWheelForward(speed);
+void EBot::rotateRight(int speed) {
+  leftWheelForward(speed);
+  rightWheelBackward(speed);
 }
 
-void EBot::write(int angle) {
+void EBot::leftWheelStop() {
+  digitalWrite(ENB, LOW);
+  digitalWrite(IN3, LOW);
+  digitalWrite(IN4, LOW);
+}
+
+void EBot::rightWheelStop() {
+  digitalWrite(ENA, LOW);
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, LOW);
+}
+
+void EBot::leftWheelForward(int speed) {
+  speed = boundaries(speed, 0, 255);
+
+  analogWrite(ENB, speed);
+  digitalWrite(IN3, LOW);
+  digitalWrite(IN4, HIGH);
+}
+
+void EBot::rightWheelForward(int speed) {
+  speed = boundaries(speed, 0, 255);
+
+  analogWrite(ENA, speed);
+  digitalWrite(IN1, HIGH);
+  digitalWrite(IN2, LOW);
+}
+
+void EBot::leftWheelBackward(int speed) {
+  speed = boundaries(speed, 0, 255);
+
+  analogWrite(ENB, speed);
+  digitalWrite(IN3, HIGH);
+  digitalWrite(IN4, LOW);
+}
+
+void EBot::rightWheelBackward(int speed) {
+  speed = boundaries(speed, 0, 255);
+
+  analogWrite(ENA, speed);
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, HIGH);
+}
+
+
+void EBot::setAngle(int angle) {
   angle = boundaries(angle, 0, 179);
 
   servo.write(angle);
 }
 
-unsigned long EBot::distance() {
+unsigned long EBot::getDistance() {
   unsigned long duration;
 
   digitalWrite(Trig, LOW);
@@ -131,6 +173,17 @@ unsigned long EBot::distance() {
   duration = pulseIn(Echo, HIGH);
 
   return duration / 29 / 2;
+}
+
+unsigned long EBot::getIR() {
+  unsigned long value = 0;
+  #ifdef WOKE
+  if (irrecv.decode(&results)) {
+    value = results.value;
+    irrecv.resume(); // Receive the next value
+  }
+  #endif
+  return value;
 }
 
 bool EBot::readLS1() {
@@ -149,16 +202,5 @@ int EBot::boundaries(int value, int min, int max) {
   value = value < min ? min : value;
   value = value > max ? max : value;
 
-  return value;
-}
-
-unsigned long EBot::result() {
-  unsigned long value = 0;
-  #ifdef WOKE
-  if (irrecv.decode(&results)) {
-      value = results.value;
-      irrecv.resume(); // Receive the next value
-    }
-  #endif
   return value;
 }

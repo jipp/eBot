@@ -10,20 +10,22 @@ void setup() {
 }
 
 void loop() {
-  eBot.rightWheelForward();
+  eBot.setSpeed();
+  eBot.setDirection(EBot::RIGHTWHEELFORWARD);
   delay(500);
-  eBot.rightWheelStop();
+  eBot.setDirection(EBot::RIGHTWHEELSTOP);
   delay(500);
-  eBot.rightWheelBackward();
+  eBot.setDirection(EBot::RIGHTWHEELBACKWARD);
   delay(500);
-  eBot.rightWheelStop();
+  eBot.setDirection(EBot::RIGHTWHEELSTOP);
   delay(500);
-  eBot.rightWheelForward(speed);
+  eBot.setSpeed(speed);
+  eBot.setDirection(EBot::RIGHTWHEELFORWARD);
   delay(500);
-  eBot.rightWheelStop();
+  eBot.setDirection(EBot::RIGHTWHEELSTOP);
   delay(500);
-  eBot.rightWheelBackward(speed);
+  eBot.setDirection(EBot::RIGHTWHEELBACKWARD);
   delay(500);
-  eBot.rightWheelStop();
+  eBot.setDirection(EBot::RIGHTWHEELSTOP);
   delay(500);
 }

@@ -1,4 +1,5 @@
 #include "Arduino.h"
+#define WOKE
 #include <EBot.h>
 
 #define A 16736925
@@ -16,25 +17,26 @@ void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
   Serial.begin(9600);
   eBot.begin();
-  eBot.stop();
+  eBot.setSpeed(speed);
+  eBot.setDirection();
 }
 
 void loop() {
-  RED = eBot.decode();
+  RED = eBot.getIR();
   if(RED==A) {
     Serial.println("A");
-    eBot.forward();
+    eBot.setDirection(EBot::FORWARD);
   } else if(RED==B) {
     Serial.println("B");
-    eBot.backward();
+    eBot.setDirection(EBot::BACKWARD);
   } else if(RED==C) {
     Serial.println("C");
-    eBot.rotateLeft();
+    eBot.setDirection(EBot::ROTATELEFT);
   } else if(RED==D) {
     Serial.println("D");
-    eBot.rotateRight();
+    eBot.setDirection(EBot::ROTATERIGHT);
   } else if(RED==X) {
     Serial.println("X");
-    eBot.stop();
+    eBot.setDirection();
   }
 }

@@ -1,4 +1,5 @@
 #include "Arduino.h"
+#define WOKE
 #include <EBot.h>
 
 #define L 16738455
@@ -20,7 +21,7 @@ void stateChange() {
 }
 
 void loop() {
-  RED = eBot.decode();
+  RED = eBot.getIR();
   if (RED != 0) {
     Serial.println(RED);
   }
