@@ -1,7 +1,7 @@
 #include "Arduino.h"
 #include <EBot.h>
 
-#ifdef WOKE
+#ifdef IRREMOTE
 IRrecv irrecv(receiverpin);
 decode_results results;
 #endif
@@ -25,7 +25,7 @@ void EBot::begin() {
   servo.write(90);
   this->setDirection();
   this->setSpeed();
-  #ifdef WOKE
+  #ifdef IRREMOTE
   irrecv.enableIRIn();
   #endif
 }
@@ -179,7 +179,7 @@ unsigned long EBot::getDistance() {
 
 unsigned long EBot::getIR() {
   unsigned long value = 0;
-  #ifdef WOKE
+  #ifdef IRREMOTE
   if (irrecv.decode(&results)) {
     value = results.value;
     irrecv.resume(); // Receive the next value
