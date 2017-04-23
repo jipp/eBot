@@ -49,7 +49,9 @@ public:
 
   void begin();
   void setDirection(direction move = STOP);
-  int setSpeed(int speed = 255);
+  direction getDirection();
+  void setSpeed(int speed = 255);
+  int getSpeed();
   void setAngle(int angle = 90);
   unsigned long getDistance();
   unsigned long getIR();

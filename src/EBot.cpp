@@ -76,10 +76,16 @@ void EBot::setDirection(EBot::direction move) {
   }
 }
 
-int EBot::setSpeed(int speed) {
+EBot::direction EBot::getDirection() {
+  return this->move;
+}
+
+void EBot::setSpeed(int speed) {
   this->speed = boundaries(speed, 0, 255);
   this->setDirection(this->move);
+}
 
+int EBot::getSpeed() {
   return this->speed;
 }
 
