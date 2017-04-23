@@ -31,7 +31,9 @@ void EBot::begin() {
 }
 
 void EBot::setDirection(EBot::direction move) {
-  switch(move) {
+  this->move = move;
+
+  switch(this->move) {
     case STOP:
     this->stop();
     break;
@@ -74,8 +76,11 @@ void EBot::setDirection(EBot::direction move) {
   }
 }
 
-void EBot::setSpeed(int speed) {
-  this->speed = speed;
+int EBot::setSpeed(int speed) {
+  this->speed = boundaries(speed, 0, 255);
+  this->setDirection(this->move);
+
+  return this->speed;
 }
 
 void EBot::stop() {
@@ -156,7 +161,6 @@ void EBot::rightWheelBackward(int speed) {
   digitalWrite(IN1, LOW);
   digitalWrite(IN2, HIGH);
 }
-
 
 void EBot::setAngle(int angle) {
   angle = boundaries(angle, 0, 179);
