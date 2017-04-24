@@ -10,13 +10,12 @@ EBot  KEYWORD1
 
 begin	KEYWORD2
 setDirection	KEYWORD2
+getDirection	KEYWORD2
 setSpeed	KEYWORD2
+getSpeed	KEYWORD2
 setAngle	KEYWORD2
+getAngle	KEYWORD2
 getDistance	KEYWORD2
-getIR	KEYWORD2
-readLS1 KEYWORD2
-readLS2 KEYWORD2
-readLS3 KEYWORD2
 
 #######################################
 # Constants (LITERAL1)
@@ -31,7 +30,3 @@ IN4 LITERAL1
 ServoPin  LITERAL1
 Echo  LITERAL1
 Trig  LITERAL1
-receiverpin LITERAL1
-LS1 LITERAL1
-LS2 LITERAL1
-LS3 LITERAL1
