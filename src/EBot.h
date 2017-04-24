@@ -1,82 +1,42 @@
-#ifdef IRREMOTE
-#include <IRremote.h>
-#endif
-
-#ifndef EBot_h
-#define EBot_h
+#ifndef EBOT_H
+#define EBOT_H
 
 #include "Arduino.h"
 #include <Servo.h>
 
-#define IN1	6
-#define IN2	7
-#define IN3	8
-#define IN4	9
-#define ENA	5
-#define ENB	11
-
-#define	ServoPin	3
-
-#define Echo	A4
-#define Trig	A5
-
-#define receiverpin	12
-
-#define LS1 10
-#define LS2 4
-#define LS3 2
-
 class EBot {
 public:
-  EBot();
-  ~EBot();
-
-  enum direction {
-    STOP,
-    FORWARD,
-    BACKWARD,
-    TURNLEFT,
-    TURNRIGHT,
-    ROTATELEFT,
-    ROTATERIGHT,
-    LEFTWHEELSTOP,
-    RIGHTWHEELSTOP,
-    LEFTWHEELFORWARD,
-    RIGHTWHEELFORWARD,
-    LEFTWHEELBACKWARD,
-    RIGHTWHEELBACKWARD
-  };
+  enum move {STOP, FORWARD, BACKWARD, TURNLEFT, TURNRIGHT, ROTATELEFT, ROTATERIGHT, LEFTWHEELSTOP, RIGHTWHEELSTOP, LEFTWHEELFORWARD, RIGHTWHEELFORWARD, LEFTWHEELBACKWARD, RIGHTWHEELBACKWARD};
 
   void begin();
-  void setDirection(direction move = STOP);
-  direction getDirection();
-  void setSpeed(int speed = 255);
+  void setSpeed(int speed=255);
   int getSpeed();
-  void setAngle(int angle = 90);
+  void setDirection(move direction=STOP);
+  move getDirection();
   unsigned long getDistance();
-  unsigned long getIR();
-  bool readLS1();
-  bool readLS2();
-  bool readLS3();
+  void setAngle(int angle=90);
+  int getAngle();
 
 private:
-  int speed = 255;
-  Servo servo;
-  direction move;
+  int speed;
+  int angle;
+  move direction;
   static int boundaries(int value, int min, int max);
+  Servo servo;
+
   void stop();
-  void forward(int speed = 255);
-  void backward(int speed = 255);
-  void turnLeft(int speed = 255);
-  void turnRight(int speed = 255);
-  void rotateLeft(int speed = 255);
-  void rotateRight(int speed = 255);
+  void forward();
+  void backward();
+  void turnLeft();
+  void turnRight();
+  void rotateLeft();
+  void rotateRight();
   void leftWheelStop();
   void rightWheelStop();
-  void leftWheelForward(int speed = 255);
-  void rightWheelForward(int speed = 255);
-  void leftWheelBackward(int speed = 255);
-  void rightWheelBackward(int speed = 255);
+  void leftWheelForward();
+  void rightWheelForward();
+  void leftWheelBackward();
+  void rightWheelBackward();
 };
 
 #endif
