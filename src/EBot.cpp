@@ -28,7 +28,7 @@ void EBot::begin() {
 }
 
 void EBot::setSpeed(int speed) {
-  this->speed = EBot::boundaries(speed, 110, 255);
+  this->speed = EBot::boundaries(speed, 120, 255);
   this->setDirection(this->direction);
 }
 
