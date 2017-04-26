@@ -23,7 +23,7 @@ public:
   };
 
   void begin();
-  void setSpeed(int speed=255);
+  void setSpeed(int speed=160);
   int getSpeed();
   void setDirection(move direction=STOP);
   move getDirection();
