@@ -13,10 +13,10 @@ env:
     - PLATFORMIO_CI_SRC=examples/Lesson1/new_right_wheel_rotation/
     - PLATFORMIO_CI_SRC=examples/Lesson2/new_bluetooth_blink/
     - PLATFORMIO_CI_SRC=examples/Lesson2/new_bluetooth_car/
-    - PLATFORMIO_CI_SRC=examples/Lesson3/new_infrared_blink/
-    - PLATFORMIO_CI_SRC=examples/Lesson3/new_Infrared_remote_control_car/
+#    - PLATFORMIO_CI_SRC=examples/Lesson3/new_infrared_blink/
+#    - PLATFORMIO_CI_SRC=examples/Lesson3/new_Infrared_remote_control_car/
     - PLATFORMIO_CI_SRC=examples/Lesson4/new_Obstacle_Avoidance_Car/
-    - PLATFORMIO_CI_SRC=examples/Lesson5/new_Line_tracking_car/
+#    - PLATFORMIO_CI_SRC=examples/Lesson5/new_Line_tracking_car/
 
 install:
     - pip install -U platformio
