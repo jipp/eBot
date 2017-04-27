@@ -1,0 +1,22 @@
+python:
+    - "2.7"
+
+sudo: false
+cache:
+    directories:
+        - "~/.platformio"
+env:
+    - PLATFORMIO_CI_SRC=examples/Lesson1/AUTO_GO_/
+    - PLATFORMIO_CI_SRC=examples/Lesson1/forward_back/
+    - PLATFORMIO_CI_SRC=examples/Lesson1/left_wheel_rotation/
+    - PLATFORMIO_CI_SRC=examples/Lesson1/right_wheel_rotation/
+    - PLATFORMIO_CI_SRC=examples/Lesson1/new_AUTO_GO_/
+    - PLATFORMIO_CI_SRC=examples/Lesson1/new_forward_back/
+    - PLATFORMIO_CI_SRC=examples/Lesson1/new_left_wheel_rotation/
+    - PLATFORMIO_CI_SRC=examples/Lesson1/new_right_wheel_rotation/
+
+install:
+    - pip install -U platformio
+
+script:
+    - platformio ci --lib="." --board=uno
