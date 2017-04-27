@@ -16,6 +16,7 @@ env:
     - PLATFORMIO_CI_SRC=examples/Lesson1/new_right_wheel_rotation/
 
 install:
+    - pip install --upgrade pip
     - pip install -U platformio
 
 script:
