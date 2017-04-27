@@ -6,7 +6,8 @@ Library for the Elegoo Smart Robot Car V2.0. It is meant to include all function
 * Arduino IDE: import the eBot.zip using the Library import function
 
 ## Needed Libraries
-the following library is needed by the eBot library - in case the lib is not installed the older Robot IRRemote lib will be used which will cause link problems!
+IR functionality is problematic. a modification of the IRremote library is needed - in case the lib is not installed the older Robot IRRemote lib will be used which will also cause link problems!
+In case you use the servo in parallel, this is as well not working.
 * [  4  ] IRremote
 
 For IRremore some modifications are needed from the original library:
