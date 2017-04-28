@@ -10,37 +10,38 @@ Library for the Elegoo Smart Robot Car V2.0. It is meant to include all function
 ## Needed Libraries
 * servo.h (standard Library)
 
-## The following features are implemented - prefix new_ is used to differentiate between original and modified examples
-* Lesson 1 - pure car movement
-* Lesson 2 - bluetooth
-* Lesson 3 - infrared -> not yet working
-* Lesson 4 - ultrasonic
-* Lesson 5 - line tracking -> not yet implemented
+## The following examples match to a feature provided
+- [x] Lesson 1 - car movement
+- [x] Lesson 2 - bluetooth
+- [ ] Lesson 3 - infrared -> not working
+- [x] Lesson 4 - ultrasonic
+- [ ] Lesson 5 - line tracking -> not yet implemented
 
 ## The following features are in progress
 * line tracking
 * IR support
 
 ## Info
-* The IRremote.h is not working as is. Modifications are needed (timer needs to be changed)
-* In case the IRremote.h is changed, the servo.h will not work as timers will collide
+* The IRremote.h is not working as provided. Modifications are needed (timer needs to be changed - see below)
+* There is IRremote.h library provided by Arduino which is quite old and should not be used anymore. The use can cause errors
+* In case the IRremote.h is changed, the servo.h will not work as timer usage will collide
 
-## IRremote.h
+### IRremote.h
 For IRremore some modifications are needed from the original library:
-* for Library version 2.3.3:
+* for Library version 2.0.1:
 ```
-diff boarddefs.h boarddefs.h.orig
-144,145c144,145
+diff IRremoteInt.h IRremoteInt.h.orig
+206,207c206,207
 < 	#define IR_USE_TIMER1   // tx = pin 9
 < 	//#define IR_USE_TIMER2     // tx = pin 3
 ---
 > 	//#define IR_USE_TIMER1   // tx = pin 9
 > 	#define IR_USE_TIMER2     // tx = pin 3
 ```
-* for Library version 2.0.1:
+* for Library version 2.3.3:
 ```
-diff IRremoteInt.h IRremoteInt.h.orig
-206,207c206,207
+diff boarddefs.h boarddefs.h.orig
+144,145c144,145
 < 	#define IR_USE_TIMER1   // tx = pin 9
 < 	//#define IR_USE_TIMER2     // tx = pin 3
 ---
