@@ -6,6 +6,9 @@
 #define IN4	9
 #define ENA	5
 #define ENB	11
+#define LS1 10
+#define LS2 4
+#define LS3 2
 
 #define	ServoPin	3
 
@@ -106,6 +109,18 @@ void EBot::setAngle(int angle) {
 
 int EBot::getAngle() {
   return this->angle;
+}
+
+bool EBot::getLine1() {
+  return digitalRead(LS1);
+}
+
+bool EBot::getLine2() {
+  return digitalRead(LS2);
+}
+
+bool EBot::getLine3() {
+  return digitalRead(LS3);
 }
 
 int EBot::boundaries(int value, int min, int max) {

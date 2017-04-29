@@ -30,6 +30,9 @@ public:
   unsigned long getDistance();
   void setAngle(int angle=90);
   int getAngle();
+  bool getLine1();
+  bool getLine2();
+  bool getLine3();
 
 private:
   int speed;
