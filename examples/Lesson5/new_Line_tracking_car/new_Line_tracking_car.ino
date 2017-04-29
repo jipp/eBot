@@ -12,14 +12,14 @@ void setup() {
 
 void loop() {
   int num1,num2,num3;
-  num1 = eBot.readLS1();
-  num2 = eBot.readLS2();
-  num3 = eBot.readLS3();
+  num1 = eBot.getLine1();
+  num2 = eBot.getLine2();
+  num3 = eBot.getLine3();
   if ((num1 == 0) && num2 && num3) {
     eBot.setDirection(EBot::ROTATELEFT);
     delay(2);
     while(1) {
-      num2 = eBot.readLS2();
+      num2 = eBot.getLine2();
       if (num2 == 1) {
         eBot.setDirection(EBot::ROTATELEFT);
         delay(2);
@@ -31,7 +31,7 @@ void loop() {
     eBot.setDirection(EBot::ROTATERIGHT);
     delay(2);
     while(1) {
-      num2 = eBot.readLS2();
+      num2 = eBot.getLine2();
       if (num2 == 1) {
         eBot.setDirection(EBot::ROTATERIGHT);
         delay(2);
